@@ -35,7 +35,11 @@ defmodule XsollaShop.Products do
       ** (Ecto.NoResultsError)
 
   """
-  def get_product!(id), do: Repo.get!(Product, id)
+  def get_product!(id) do
+    with nil <- Repo.get_by(Product, sku: id) do
+      Repo.get!(Product, id)
+    end
+  end
 
   @doc """
   Creates a product.
