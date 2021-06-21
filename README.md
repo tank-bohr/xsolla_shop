@@ -1,19 +1,32 @@
 # XsollaShop
 
-To start your Phoenix server:
+## Development
 
-  * Install dependencies with `mix deps.get`
-  * Create and migrate your database with `mix ecto.setup`
-  * Start Phoenix endpoint with `mix phx.server`
+### Prerequisite
 
-Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
+  * Elixir
+  * docker-compose
 
-Ready to run in production? Please [check our deployment guides](https://hexdocs.pm/phoenix/deployment.html).
 
-## Learn more
+### Run app in local env
 
-  * Official website: https://www.phoenixframework.org/
-  * Guides: https://hexdocs.pm/phoenix/overview.html
-  * Docs: https://hexdocs.pm/phoenix
-  * Forum: https://elixirforum.com/c/phoenix-forum
-  * Source: https://github.com/phoenixframework/phoenix
+- Run local postgres: `docker-compose up -d db`
+- `mix deps.get`
+- `make server`
+
+### Usage
+
+Create product:
+
+```bash
+curl \
+  -H "Content-Type: application/json" \
+  -d '{"product": {"sku": "ko-ko", "name": "game", "cost": 10, "type": "toy"}}' \
+  http://localhost:4000/api/products
+```
+
+List products:
+
+```bash
+curl http://localhost:4000/api/products
+```
