@@ -6,8 +6,13 @@ defmodule XsollaShopWeb.ProductController do
 
   action_fallback XsollaShopWeb.FallbackController
 
-  def index(conn, _params) do
-    products = Products.list_products()
+  def index(conn, params) do
+    products =
+      params
+      |> Map.get("page", "1")
+      |> String.to_integer()
+      |> Products.list_products()
+
     render(conn, "index.json", products: products)
   end
 

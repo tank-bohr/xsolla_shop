@@ -8,17 +8,14 @@ defmodule XsollaShop.Products do
 
   alias XsollaShop.Products.Product
 
-  @doc """
-  Returns the list of products.
+  def list_products(page, size \\ 100) when is_integer(page) do
+    offset = (page - 1) * size
+    query = from p in Product,
+      limit: ^size,
+      offset: ^offset,
+      order_by: p.inserted_at
 
-  ## Examples
-
-      iex> list_products()
-      [%Product{}, ...]
-
-  """
-  def list_products do
-    Repo.all(Product)
+    Repo.all(query)
   end
 
   @doc """
