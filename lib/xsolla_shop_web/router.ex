@@ -7,5 +7,7 @@ defmodule XsollaShopWeb.Router do
 
   scope "/api", XsollaShopWeb do
     pipe_through :api
+
+    resources "/products", ProductController, except: [:new, :edit]
   end
 end
